@@ -6,7 +6,3 @@ app = Flask(__name__)
 @app.route('/')
 def index_page():
 	return render_template('index.html')
-
-@app.route("/hello")
-def hello_page():
-	return "This is the hello world page."
