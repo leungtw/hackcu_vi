@@ -1,7 +1,4 @@
-# hackcu_vi
+# HackCU VI
 ------------
 
-* Job Tracker
-* Geocaching
-* Police/Traffic sighting report
-* 
+ Job Tracker
