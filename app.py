@@ -1,5 +1,6 @@
-from flask import Flask, render_template, redirect, flash, request
-import requests
+from flask import Flask, render_template, redirect
+from flask import flash, request
+from flask import jsonify
 import json
 app = Flask(__name__)
 
@@ -26,5 +27,5 @@ def submit():
 	location = request.form["location"]
 	link = request.form["link"]
 	submitted = request.form["submitted"]
-
+	
 	return render_template("data.html")
