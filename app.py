@@ -131,6 +131,9 @@ def submit():
 		dict_count = db.posts.find(tmp_dct).count()
 		state_dict[state] = dict_count
 	print(state_dict)
+	state_dict_vals = []
+	for state in state_list:
+		state_dict_vals.append(state_dict[state])
 
 	
 	# when the checkbox is unchecked, it will not
@@ -145,7 +148,8 @@ def submit():
 	return render_template("dashboard.html", 
 							table_contents=table_contents, 
 						 	approved_column_headers=approved_column_headers,
-							state_dict=state_dict)
+							state_dict=state_dict,
+							state_dict_vals=state_dict_vals)
 
 
 @app.route('/scrape_linkedin', methods=['GET', 'POST'])
