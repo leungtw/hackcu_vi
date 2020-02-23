@@ -20,12 +20,11 @@ def push_data(data_set, table):
 	return post_response
 
 def select_column_headers(dictionary, approved_columns):
-	approved_columns_copy = approved_columns.copy()
-	for entry_keys _ in dictionary.values():
-		if entry_keys not in approved_columns:
-			del approved_columns_copy[entry_key]
-	return approved_columns_copy
-
+	dict_copy = dictionary.copy()
+	for entry_key in dictionary.keys():
+		if entry_key not in approved_columns:
+			del dict_copy[entry_key]
+	return dict_copy
 #============================
 
 @app.route('/')
@@ -51,8 +50,13 @@ def analytics_page():
 @app.route("/submit", methods=['GET', 'POST'])
 def submit():
 	response = dict(request.form)
-	#strip "submit" button data from the request.form
-	del response["submit"]
+	approved_column_headers = ["company", 
+	                           "position", 
+	                           "location", 
+							   "link", 
+						       "submitted"]
+	response = select_column_headers(response, 
+								     approved_column_headers)
 	
 	#when the checkbox is unchecked, it will not
 	#show the checkbox in the data form, so
