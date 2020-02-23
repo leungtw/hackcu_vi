@@ -35,9 +35,17 @@ def index_page():
 def home_page():
 	return render_template('index.html')
 
-@app.route('/data')
-def data_page():
-	return render_template('data.html')
+@app.route('/dashboard')
+def dashboard_page():
+	return render_template('dashboard.html')
+
+@app.route('/add')
+def add_page():
+	return render_template('add.html')
+
+@app.route('/analytics')
+def analytics_page():
+	return render_template('analytics.html')
 
 @app.route("/submit", methods=['GET', 'POST'])
 def submit():
