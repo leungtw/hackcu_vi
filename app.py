@@ -60,7 +60,6 @@ def analytics_page():
 def submit():
 
 	table_contents = get(db.posts)
-	print(type(table_contents))
 	
 	response = dict(request.form)
 	approved_column_headers = ["company", 
@@ -79,12 +78,8 @@ def submit():
 
 	if "submitted" not in response:
 		response["submitted"] = "false"
-	print("response: ", response)
-	print("table_contents: ", table_contents)
 	#send the data to mongoDB
 	push_data(response, db.posts)
-	#print the form response to the console
-	print(list(table_contents))
 	return render_template("dashboard.html", table_contents=table_contents, approved_column_headers=approved_column_headers)
 
 
