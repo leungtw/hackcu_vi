@@ -18,7 +18,6 @@ def setup_mongo_client():
 def push_data(data_set, table):
 	post_response = table.insert_one(data_set.insert_id)
 	return post_response
-	
 #============================
 
 @app.route('/')
