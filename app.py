@@ -35,7 +35,7 @@ def get(collection):
     for document in documents:
         document['_id'] = str(document['_id'])
         response.append(document)
-    return json.dumps(response)
+    return json.loads(json.dumps(response))
 
 #============================
 
@@ -64,6 +64,7 @@ def analytics_page():
 def submit():
 
 	table_contents = get(db.posts)
+	print(type(table_contents))
 	
 	response = dict(request.form)
 	approved_column_headers = ["company", 
@@ -78,7 +79,7 @@ def submit():
 	# when the checkbox is unchecked, it will not
 	# show the checkbox in the data form, so
 	# mark it as false if it was not filled in
-	
+	approved_column_headers.insert(0, "_id")
 
 	if "submitted" not in response:
 		response["submitted"] = "false"
@@ -87,8 +88,8 @@ def submit():
 	#send the data to mongoDB
 	push_data(response, db.posts)
 	#print the form response to the console
-	print(table_contents)
-	return render_template("dashboard.html", table_contents=table_contents)
+	print(list(table_contents))
+	return render_template("dashboard.html", table_contents=table_contents, approved_column_headers=approved_column_headers)
 
 
 @app.route('/scrape_linkedin', methods=['GET', 'POST'])

@@ -113,37 +113,30 @@
             <table class="table table-striped table-sm">
               <thead>
                 <tr>
-                  {% if table_contents %}
-                    {% for columns in table_contents %}
-                    <th> {{ columns }}</th>
+                  {% if approved_column_headers %}
+                    {% for columns in approved_column_headers %}
+                    <th> {{ columns }} </th>
                     {% endfor %}
                   {% endif %}
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                
+                {% if table_contents %} 
+
                   {% for i in range(1, table_contents|length) %}
-                    <td> </td>
+                  <tr>
+                    {% for column_header in approved_column_headers %}
+                      {% if column_header == "_id" %}
+                      <td> {{ i }} </td>
+                      {% elif column_header != "_id" %}
+                        <td> {{ table_contents[i][column_header] }} </td>
+                      {% endif %}
+                    {% endfor %}
+                  </tr>
                   {% endfor %}
-                  <td>1</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>amet</td>
-                  <td>consectetur</td>
-                  <td>adipiscing</td>
-                  <td>elit</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-                </tr>
+                {% endif %}
+
               </tbody>
           </div>
         </main>
