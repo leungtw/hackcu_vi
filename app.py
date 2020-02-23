@@ -25,6 +25,15 @@ def select_column_headers(dictionary, approved_columns):
 		if entry_key not in approved_columns:
 			del dict_copy[entry_key]
 	return dict_copy
+
+def get(collection):
+    documents = collection.find()
+    response = []
+    for document in documents:
+        document['_id'] = str(document['_id'])
+        response.append(document)
+    return json.dumps(response)
+
 #============================
 
 @app.route('/')
@@ -49,38 +58,38 @@ def analytics_page():
 
 @app.route("/submit", methods=['GET', 'POST'])
 def submit():
+
+	table_contents = get(db.posts)
+	
 	response = dict(request.form)
 	approved_column_headers = ["company", 
 	                           "position", 
 	                           "location", 
 							   "link", 
 						       "submitted"]
-	print(response)
+	
 	response = select_column_headers(response, 
 								     approved_column_headers)
 	
-	#when the checkbox is unchecked, it will not
-	#show the checkbox in the data form, so
-	#mark it as false if it was not filled in
-	print (response)
+	# when the checkbox is unchecked, it will not
+	# show the checkbox in the data form, so
+	# mark it as false if it was not filled in
+
 	if "submitted" not in response:
 		response["submitted"] = "false"
 
 	#send the data to mongoDB
 	push_data(response, db.posts)
 	#print the form response to the console
-	pprint (response)
-	return redirect("data")
+
+	return render_template("dashboard.html", table_contents=table_contents)
 
 
 def page_not_found(e):
 	return "Something went wrong...", e
 
-
-
-
 if __name__ == "__main__":
 	client = setup_mongo_client()
 	db = client.job_db
-	app.run(debug=True)
+	app.run(debug=False)
 
