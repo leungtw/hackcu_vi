@@ -20,12 +20,11 @@ def push_data(data_set, table):
 	return post_response
 
 def select_column_headers(dictionary, approved_columns):
-	approved_columns_copy = approved_columns.copy()
-	for entry_keys _ in dictionary.values():
-		if entry_keys not in approved_columns:
-			del approved_columns_copy[entry_key]
-	return approved_columns_copy
-
+	dict_copy = dictionary.copy()
+	for entry_key in dictionary.keys():
+		if entry_key not in approved_columns:
+			del dict_copy[entry_key]
+	return dict_copy
 #============================
 
 @app.route('/')
