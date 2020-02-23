@@ -74,6 +74,64 @@ def submit():
 	
 	response = select_column_headers(response, 
 								     approved_column_headers)
+	state_list = ['Alabama',
+					'Alaska', 
+					'Arizona', 
+					'Arkansas', 
+					'California',
+					'Colorado', 
+					'Connecticut',
+					'Delaware', 
+					'Florida', 
+					'Georgia',
+					'Hawaii', 
+					'Idaho', 
+					'Illinois', 
+					'Indiana', 
+					'Iowa', 
+					'Kansas', 
+					'Kentucky',
+					'Louisiana', 
+					'Maine', 
+					'Maryland',
+					'Massachusetts', 
+					'Michigan', 
+					'Mississippi', 
+					'Missouri', 
+					'Minnesota', 
+					'Montana',
+					'Nebraska', 
+					'Nevada', 
+					'New Hampshire', 
+					'New Jersey', 
+					'New Mexico', 
+					'New York', 
+					'North Carolina',
+					'North Dakota', 
+					'Ohio', 
+					'Oklahoma', 
+					'Oregon', 
+					'Pennsylvania', 
+					'Rhode Island', 
+					'South Carolina', 
+					'South Dakota', 
+					'Tennessee', 
+					'Texas',
+					'Utah', 
+					'Vermont', 
+					'Virginia', 
+					'Wyoming',
+					'Washington',
+					'Wisconsin',
+					'West Virginia']
+
+	state_dict = {}
+	for state in state_list:
+		tmp_dct = {"location" : state }
+		dict_count = db.posts.find(tmp_dct).count()
+		state_dict[state] = dict_count
+	print(state_dict)
+
 	
 	# when the checkbox is unchecked, it will not
 	# show the checkbox in the data form, so
@@ -81,10 +139,13 @@ def submit():
 	approved_column_headers.insert(0, "_id")
 
 	if "submitted" not in response:
-		response["submitted"] = "false"
+		response["submitted"] = "None Selected"
 	#send the data to mongoDB
 	push_data(response, db.posts)
-	return render_template("dashboard.html", table_contents=table_contents, approved_column_headers=approved_column_headers)
+	return render_template("dashboard.html", 
+							table_contents=table_contents, 
+						 	approved_column_headers=approved_column_headers,
+							state_dict=state_dict)
 
 
 @app.route('/scrape_linkedin', methods=['GET', 'POST'])

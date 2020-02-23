@@ -202,8 +202,8 @@
     google.charts.setOnLoadCallback(drawRegionsMap);
 
     function drawRegionsMap() {
-      var data = google.visualization.arrayToDataTable([
-        ['State', 'Application Count'],
+      var state_arr = 
+      [['State', 'Application Count'],
         ['Alabama', 12],
         ['Alaska', 5],
         ['Arizona', 3],
@@ -253,8 +253,8 @@
         ['Wyoming', 0],
         ['Washington', 0],
         ['Wisconsin', 0],
-        ['West Virginia', 0],
-      ]);
+        ['West Virginia', 0]];
+      var data = google.visualization.arrayToDataTable(state_arr);
 
       var options = {
         region: 'US',
