@@ -18,6 +18,14 @@ def setup_mongo_client():
 def push_data(data_set, table):
 	post_response = table.insert_one(data_set.insert_id)
 	return post_response
+
+def select_column_headers(dictionary, approved_columns):
+	approved_columns_copy = approved_columns.copy()
+	for entry_keys _ in dictionary.values():
+		if entry_keys not in approved_columns:
+			del approved_columns_copy[entry_key]
+	return approved_columns_copy
+
 #============================
 
 @app.route('/')
@@ -41,6 +49,7 @@ def submit():
 	#when the checkbox is unchecked, it will not
 	#show the checkbox in the data form, so
 	#mark it as false if it was not filled in
+
 	if "submitted" not in response:
 		response["submitted"] = "false"
 
