@@ -55,22 +55,22 @@ def submit():
 	                           "location", 
 							   "link", 
 						       "submitted"]
-	print(response)
+	
 	response = select_column_headers(response, 
 								     approved_column_headers)
 	
-	#when the checkbox is unchecked, it will not
-	#show the checkbox in the data form, so
-	#mark it as false if it was not filled in
-	print (response)
+	# when the checkbox is unchecked, it will not
+	# show the checkbox in the data form, so
+	# mark it as false if it was not filled in
+
 	if "submitted" not in response:
 		response["submitted"] = "false"
 
 	#send the data to mongoDB
 	push_data(response, db.posts)
 	#print the form response to the console
-	pprint (response)
-	return redirect("data")
+
+	return redirect("dashboard")
 
 
 def page_not_found(e):
@@ -82,5 +82,5 @@ def page_not_found(e):
 if __name__ == "__main__":
 	client = setup_mongo_client()
 	db = client.job_db
-	app.run(debug=True)
+	app.run(debug=False)
 
