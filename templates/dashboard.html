@@ -115,7 +115,7 @@
                 <tr>
                   {% if approved_column_headers %}
                     {% for columns in approved_column_headers %}
-                    <th> {{ columns }}</th>
+                    <th> {{ columns }} </th>
                     {% endfor %}
                   {% endif %}
                 </tr>
@@ -123,10 +123,15 @@
               <tbody>
                 
                 {% if table_contents %} 
-                  {% for dict_item in table_contents %}
+
+                  {% for i in range(1, table_contents|length) %}
                   <tr>
                     {% for column_header in approved_column_headers %}
-                      <td> {{ dict_item[column_header] }} </td>
+                      {% if column_header == "_id" %}
+                      <td> {{ i }} </td>
+                      {% elif column_header != "_id" %}
+                        <td> {{ table_contents[i][column_header] }} </td>
+                      {% endif %}
                     {% endfor %}
                   </tr>
                   {% endfor %}
