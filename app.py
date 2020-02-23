@@ -5,7 +5,7 @@ from pymongo import MongoClient
 from pprint import pprint
 
 import json
-
+	
 app = Flask(__name__)
 #====== helper methods ======
 def setup_mongo_client():
@@ -16,7 +16,7 @@ def setup_mongo_client():
 	return client
 
 def push_data(data_set, table):
-	post_response = table.insert_one(data_set.insert_id)
+	post_response = table.insert_one(data_set)
 	return post_response
 
 def select_column_headers(dictionary, approved_columns):
@@ -55,13 +55,14 @@ def submit():
 	                           "location", 
 							   "link", 
 						       "submitted"]
+	print(response)
 	response = select_column_headers(response, 
 								     approved_column_headers)
 	
 	#when the checkbox is unchecked, it will not
 	#show the checkbox in the data form, so
 	#mark it as false if it was not filled in
-
+	print (response)
 	if "submitted" not in response:
 		response["submitted"] = "false"
 
@@ -69,16 +70,17 @@ def submit():
 	push_data(response, db.posts)
 	#print the form response to the console
 	pprint (response)
-	posts = db.posts
-	post_id = posts.insert_one(response).insert_id
 	return redirect("data")
 
 
 def page_not_found(e):
 	return "Something went wrong...", e
 
+
+
+
 if __name__ == "__main__":
+	client = setup_mongo_client()
+	db = client.job_db
 	app.run(debug=True)
 
-	client = setup_mongo_client()
-	db = client.test_database
