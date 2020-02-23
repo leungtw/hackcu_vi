@@ -74,14 +74,16 @@ def submit():
 	# when the checkbox is unchecked, it will not
 	# show the checkbox in the data form, so
 	# mark it as false if it was not filled in
+	
 
 	if "submitted" not in response:
 		response["submitted"] = "false"
-
+	print("response: ", response)
+	print("table_contents: ", table_contents)
 	#send the data to mongoDB
 	push_data(response, db.posts)
 	#print the form response to the console
-
+	print(table_contents)
 	return render_template("dashboard.html", table_contents=table_contents)
 
 
