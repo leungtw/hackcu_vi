@@ -64,7 +64,7 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Dashboard</h1>
+            <h1 class="h2">Analytics</h1>
           </div>
 
           <div class="row">
@@ -88,7 +88,7 @@
           <div class="row">
           <div class="col-xs-12 col-sm-12">
               <div class="card"><div class="card-body">
-                <div id="regions_div" style="width: 900; height: 500;"></div>
+                <div id="sankey_multiple" style="width: 900px; height: 300px;"></div>
               </div></div>
             </div>
           </div>
@@ -178,6 +178,37 @@
 
       chart.draw(data, options);
     }
+  </script>
+
+  <!-- Sankey Graph -->
+  <script type="text/javascript">
+    google.charts.load("current", {packages:["sankey"]});
+    google.charts.setOnLoadCallback(drawChart);
+     function drawChart() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'From');
+      data.addColumn('string', 'To');
+      data.addColumn('number', 'Weight');
+      data.addRows([
+         [ 'Submitted', 'No Response', 6 ],
+         [ 'Submitted', 'Rejected', 7 ],
+         [ 'Submitted', 'Interview', 6 ],
+         [ 'Interview', 'Rejected', 2 ],
+         [ 'Interview', 'Technical Interview', 3 ],
+         [ 'Interview', 'Offer', 1 ],
+         [ 'Technical Interview', 'Rejected', 1 ],
+         [ 'Technical Interview', 'Offer', 2 ],
+      ]);
+
+      // Set chart options
+      var options = {
+        width: 600,
+      };
+
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.Sankey(document.getElementById('sankey_multiple'));
+      chart.draw(data, options);
+     }
   </script>
 
 </html>
