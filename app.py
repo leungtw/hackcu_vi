@@ -50,8 +50,13 @@ def analytics_page():
 @app.route("/submit", methods=['GET', 'POST'])
 def submit():
 	response = dict(request.form)
-	#strip "submit" button data from the request.form
-	del response["submit"]
+	approved_column_headers = ["company", 
+	                           "position", 
+	                           "location", 
+							   "link", 
+						       "submitted"]
+	response = select_column_headers(response, 
+								     approved_column_headers)
 	
 	#when the checkbox is unchecked, it will not
 	#show the checkbox in the data form, so
