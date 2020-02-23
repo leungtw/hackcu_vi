@@ -3,8 +3,11 @@ from flask import flash, request
 from flask import jsonify
 from pymongo import MongoClient
 from pprint import pprint
+from bs4 import BeautifulSoup
 
 import json
+import requests
+import re
 	
 app = Flask(__name__)
 #====== helper methods ======
@@ -50,7 +53,8 @@ def dashboard_page():
 
 @app.route('/add')
 def add_page():
-	return render_template('add.html')
+	information = { "company": "", "position": "", "location": ""}
+	return render_template('add.html', information=information)
 
 @app.route('/analytics')
 def analytics_page():
@@ -82,6 +86,31 @@ def submit():
 	push_data(response, db.posts)
 	return render_template("dashboard.html", table_contents=table_contents, approved_column_headers=approved_column_headers)
 
+
+@app.route('/scrape_linkedin', methods=['GET', 'POST'])
+def scrape():
+	url = request.form["link"]
+	page = requests.get(url).text
+	soup = BeautifulSoup(page, "html.parser")
+
+	title = soup.find('title')
+	title_str = str(title)
+
+	if title_str is None:
+		return render_template('add.html')
+
+	# <title>Brooksource hiring Data Analyst in Stamford, Connecticut, United States | LinkedIn</title>
+	print(title_str)
+
+	company = title_str[title_str.find('<title>')+7 : title_str.find(' ')]
+	position = title_str[title_str.find('hiring ')+7 : title_str.find(' in')]
+	location = title_str[title_str.find(', ')+2 : title_str.find(', United States')]
+
+	print(company + position + location)
+
+	information = { "company": company, "position": position, "location": location, "link":str(url)}
+
+	return render_template('add.html', information=information)
 
 def page_not_found(e):
 	return "Something went wrong...", e
