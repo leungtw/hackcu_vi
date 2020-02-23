@@ -73,36 +73,38 @@
                 <div id="piechart" style="width: 500; height: 500;"></div>
               </div></div>
 
-              <div class="card"><div class="card-body">
+              <div class="card" style="margin-top:30px;"><div class="card-body">
               <div id="donutchart" style="width: 500; height: 500;"></div>
               </div></div>
 
             </div>
             <div class="col-xs-6 col-sm-8">
-              <div class="card"><div class="card-body">
+              <div class="card" style="padding-bottom:76px;"><div class="card-body">
                 <div id="regions_div" style="width: 900; height: 500;"></div>
               </div></div>
             </div>
           </div>
+
+          <hr>
 
           <h2 class="sub-header">Add Entry</h2>
           <div class="form-group">
           <form action="/submit" method="POST">
 
             <label for="company">Company</label>
-            <input type="text" class="form-control" id="company" name="company" placeholder="Krusty Krab">
+            <input type="text" class="form-control form-spacing" id="company" name="company" placeholder="Krusty Krab">
 
             <label for="position">Position</label>
-            <input type="text" class="form-control" id="position" name="position" placeholder="Cook">
+            <input type="text" class="form-control form-spacing" id="position" name="position" placeholder="Cook">
 
             <label for="location">Location</label>
-            <input type="text" class="form-control" id="location" name="location" placeholder="Bikini Bottom">
+            <input type="text" class="form-control form-spacing" id="location" name="location" placeholder="Bikini Bottom">
 
             <label for="link">Link</label>
-            <input type="text" class="form-control" id="link" name="link" placeholder="https://thekrustykrabpenida.business.site/">
+            <input type="text" class="form-control form-spacing" id="link" name="link" placeholder="https://thekrustykrabpenida.business.site/">
 
             <label for="status">Application Status</label>
-            <select class="form-control" name="submitted">
+            <select class="form-control form-spacing" name="submitted">
               <option>In Progress</option>
               <option>Submitted</option>
               <option>Interview</option>
@@ -115,6 +117,8 @@
             <input type="submit" class="btn btn-primary btn-block" name="submit" value="Submit"></input>
           </form>
           </div>
+
+          <hr>
 
           <h2>Overview</h2>
           <div class="table-responsive">
