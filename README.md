@@ -9,6 +9,8 @@ Dependencies:
 
 `python -m pip install flask`
 `python -m pip install pymongo`
+`pip install requests`
+`pip install beautifulsoup4`
 
 If your venv cannot find one of the modules, try:
 `sudo apt install python[version#]-flask`
