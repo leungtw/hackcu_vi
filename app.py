@@ -82,7 +82,7 @@ def submit():
 	push_data(response, db.posts)
 	#print the form response to the console
 
-	return render_template("dashboard", response=response)
+	return render_template("dashboard", table_contents=table_contents)
 
 
 def page_not_found(e):
