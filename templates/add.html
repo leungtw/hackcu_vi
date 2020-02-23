@@ -83,8 +83,15 @@
             <label for="link">Link</label>
             <input type="text" class="form-control" id="link" name="link" placeholder="https://thekrustykrabpenida.business.site/">
 
-            <label for="status">Application Submitted?</label>
-            <input type="checkbox" id="submitted" name="submitted" value="true">
+            <label for="status">Application Status</label>
+            <select class="form-control">
+              <option>Submitted</option>
+              <option>Interview</option>
+              <option>Technical Interview</option>
+              <option>Rejected</option>
+              <option>No Response</option>
+              <option>Offer</option>
+            </select>
 
             <input type="submit" class="btn btn-primary btn-block" name="submit" value="Submit"></input>
           </form>
@@ -113,8 +120,15 @@
             <label for="link">Link</label>
             <input type="text" class="form-control" id="s_link" name="link" placeholder="https://thekrustykrabpenida.business.site/" value="{{ information['link'] }}">
 
-            <label for="status">Application Submitted?</label>s
-            <input type="checkbox" id="submitted" name="submitted" value="true">
+            <label for="status">Application Status</label>
+            <select class="form-control">
+              <option>Submitted</option>
+              <option>Interview</option>
+              <option>Technical Interview</option>
+              <option>Rejected</option>
+              <option>No Response</option>
+              <option>Offer</option>
+            </select>
 
             <input type="submit" class="btn btn-primary btn-block" name="submit" value="Submit"></input>
           </form>
