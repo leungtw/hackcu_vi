@@ -130,11 +130,18 @@ def submit():
 		tmp_dct = {"location" : state }
 		dict_count = db.posts.find(tmp_dct).count()
 		state_dict[state] = dict_count
-	print(state_dict)
 	state_dict_vals = []
 	for state in state_list:
 		state_dict_vals.append(state_dict[state])
 
+	in_progress = db.posts.find({"submitted": "In Progress"}).count()
+	subbed = db.posts.find({"submitted" : "Submitted"}).count()
+	respnd = db.posts.find({"submitted" : "Responded"}).count()
+	_offer = db.posts.find({"submitted" : "Offer"}).count()
+	_reject = db.posts.find({"submitted" : "Rejected"}).count()
+	_interview = db.posts.find({"submitted" : "Interview Ongoing"}).count()
+
+	print(in_progress, subbed, respnd)
 	
 	# when the checkbox is unchecked, it will not
 	# show the checkbox in the data form, so
@@ -149,7 +156,9 @@ def submit():
 							table_contents=table_contents, 
 						 	approved_column_headers=approved_column_headers,
 							state_dict=state_dict,
-							state_dict_vals=state_dict_vals)
+							state_dict_vals=state_dict_vals,
+							in_progress=in_progress, subbed=subbed, respnd=respnd,
+							_offer = _offer, _reject=_reject, _interview=_interview)
 
 
 @app.route('/scrape_linkedin', methods=['GET', 'POST'])

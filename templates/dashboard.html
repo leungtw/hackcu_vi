@@ -166,11 +166,14 @@
     google.charts.load("current", {packages:["corechart"]});
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
+      var in_progress_html = {{in_progress}} 
+      var subbed_html = {{subbed}}
+      var respond_html = {{respnd}} 
       var data = google.visualization.arrayToDataTable([
         ['Status', 'Count'],
-        ['In Progress',     11],
-        ['Submitted',      2],
-        ['Responded',  2],
+        ['In Progress',  in_progress_html],
+        ['Submitted',     subbed_html],
+        ['Responded',    respond_html],
       ]);
 
       var options = {
@@ -185,11 +188,14 @@
     google.charts.load("current", {packages:["corechart"]});
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
+      var offer_html = {{_offer}} 
+      var reject_html = {{_reject}}
+      var interview_html = {{_interview}} 
       var data = google.visualization.arrayToDataTable([
         ['Status', 'Count'],
-        ['Rejected',     8],
-        ['Interview Ongoing', 4],
-        ['Offer',  1],
+        ['Rejected',     reject_html],
+        ['Interview Ongoing', interview_html],
+        ['Offer',  offer_html],
       ]);
 
       var options = {
