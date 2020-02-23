@@ -6,6 +6,7 @@ from pprint import pprint
 
 import json
 
+app = Flask(__name__)
 #====== helper methods ======
 def setup_mongo_client():
 	usr_name = "sale3054"
@@ -46,7 +47,7 @@ def page_not_found(e):
 	return "You suck", e
 
 if __name__ == "__main__":
-	app = Flask(__name__)
+	app.run(debug=True)
 
 	client = setup_mongo_client()
 	db = client.job_db
