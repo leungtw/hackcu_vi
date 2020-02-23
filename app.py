@@ -14,6 +14,11 @@ def setup_mongo_client():
 	client = MongoClient('''mongodb://'''+usr_name+''':'''+ pw +
 						 '''@cluster0-shard-00-00-g3da1.mongodb.net:27017,cluster0-shard-00-01-g3da1.mongodb.net:27017,cluster0-shard-00-02-g3da1.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority''')
 	return client
+
+def push_data(data_set, table):
+	post_response = table.insert_one(data_set.insert_id)
+	return post_response
+	
 #============================
 
 @app.route('/')
@@ -30,24 +35,30 @@ def data_page():
 
 @app.route("/submit", methods=['GET', 'POST'])
 def submit():
-
 	response = dict(request.form)
-
+	#strip "submit" button data from the request.form
 	del response["submit"]
+	
+	#when the checkbox is unchecked, it will not
+	#show the checkbox in the data form, so
+	#mark it as false if it was not filled in
 	if "submitted" not in response:
 		response["submitted"] = "false"
-	pprint(response)
 
-
+	#send the data to mongoDB
+	push_data(response, db.posts)
+	#print the form response to the console
+	pprint (response)
 	posts = db.posts
-	post_id = posts.insert_one(response)
+	post_id = posts.insert_one(response).insert_id
 	return redirect("data")
 
+
 def page_not_found(e):
-	return "You suck", e
+	return "Something went wrong...", e
 
 if __name__ == "__main__":
 	app.run(debug=True)
 
 	client = setup_mongo_client()
-	db = client.job_db
+	db = client.test_database
