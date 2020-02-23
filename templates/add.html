@@ -67,20 +67,20 @@
             <h1 class="h2">Add New Application Entry</h1>
           </div>
 
-          <h2 class="sub-header">Manual Entry</h2>
+          <h4>Manual Entry</h4>
           <div class="form-group">
           <form action="/submit" method="POST">
+            <label for="link">Link</label>
+            <input type="text" class="form-control" id="link" name="link" placeholder="https://thekrustykrabpenida.business.site/">
+
             <label for="company">Company</label>
-            <input type="text" class="form-control" id="company" name="company" placeholder="Company">
+            <input type="text" class="form-control" id="company" name="company" placeholder="Krusty Krab">
 
             <label for="position">Position</label>
-            <input type="text" class="form-control" id="position" name="position" placeholder="Position">
+            <input type="text" class="form-control" id="position" name="position" placeholder="Cook">
 
             <label for="location">Location</label>
-            <input type="text" class="form-control" id="location" name="location" placeholder="Location">
-
-            <label for="link">Link</label>
-            <input type="text" class="form-control" id="link" name="link" placeholder="Link">
+            <input type="text" class="form-control" id="location" name="location" placeholder="Bikini Bottom">
 
             <label for="status">Application Submitted?</label>
             <input type="checkbox" id="submitted" name="submitted" value="true">
@@ -88,6 +88,31 @@
             <input type="submit" class="btn btn-primary btn-block" name="submit" value="Submit"></input>
           </form>
           </div>
+
+          <hr>
+
+          <h4>LinkedIn Posting Web Scrape Entry</h4>
+          <div class="form-group">
+          <form action="/submit" method="POST">
+            <label for="link">Link</label>
+            <input type="text" class="form-control" id="link" name="link" placeholder="https://thekrustykrabpenida.business.site/">
+
+            <label for="company">Company</label>
+            <input type="text" class="form-control" id="company" name="company" placeholder="Krusty Krab">
+
+            <label for="position">Position</label>
+            <input type="text" class="form-control" id="position" name="position" placeholder="Cook">
+
+            <label for="location">Location</label>
+            <input type="text" class="form-control" id="location" name="location" placeholder="Bikini Bottom">
+
+            <label for="status">Application Submitted?</label>s
+            <input type="checkbox" id="submitted" name="submitted" value="true">
+
+            <input type="submit" class="btn btn-primary btn-block" name="submit" value="Submit"></input>
+          </form>
+          </div>
+
         </main>
       </div>
     </div>
