@@ -26,7 +26,7 @@ def select_column_headers(dictionary, approved_columns):
 			del dict_copy[entry_key]
 	return dict_copy
 
-def get():
+def get(collection):
     documents = collection.find()
     response = []
     for document in documents:
@@ -59,7 +59,7 @@ def analytics_page():
 @app.route("/submit", methods=['GET', 'POST'])
 def submit():
 
-	table_contents = get()
+	table_contents = get(db.posts)
 	
 	response = dict(request.form)
 	approved_column_headers = ["company", 
@@ -82,14 +82,11 @@ def submit():
 	push_data(response, db.posts)
 	#print the form response to the console
 
-	return render_template("dashboard", table_contents=table_contents)
+	return render_template("dashboard.html", table_contents=table_contents)
 
 
 def page_not_found(e):
 	return "Something went wrong...", e
-
-
-
 
 if __name__ == "__main__":
 	client = setup_mongo_client()
