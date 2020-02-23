@@ -25,6 +25,15 @@ def select_column_headers(dictionary, approved_columns):
 		if entry_key not in approved_columns:
 			del dict_copy[entry_key]
 	return dict_copy
+
+def get():
+    documents = collection.find()
+    response = []
+    for document in documents:
+        document['_id'] = str(document['_id'])
+        response.append(document)
+    return json.dumps(response)
+
 #============================
 
 @app.route('/')
@@ -49,6 +58,9 @@ def analytics_page():
 
 @app.route("/submit", methods=['GET', 'POST'])
 def submit():
+
+	table_contents = get()
+	
 	response = dict(request.form)
 	approved_column_headers = ["company", 
 	                           "position", 
@@ -70,7 +82,7 @@ def submit():
 	push_data(response, db.posts)
 	#print the form response to the console
 
-	return redirect("dashboard")
+	return render_template("dashboard", response=response)
 
 
 def page_not_found(e):
