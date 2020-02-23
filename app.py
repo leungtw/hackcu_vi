@@ -26,6 +26,13 @@ def submit():
 	position = request.form["position"]
 	location = request.form["location"]
 	link = request.form["link"]
-	submitted = request.form["submitted"]
-	
+	try:
+		submitted = request.form["submitted"]
+	except:
+		submitted = "False"
+
+	print(company, position, location, link, submitted)
 	return render_template("data.html")
+
+def page_not_found(e):
+	return "You suck", e
