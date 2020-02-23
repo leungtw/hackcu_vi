@@ -70,8 +70,6 @@
           <h4>Manual Entry</h4>
           <div class="form-group">
           <form action="/submit" method="POST">
-            <label for="link">Link</label>
-            <input type="text" class="form-control" id="link" name="link" placeholder="https://thekrustykrabpenida.business.site/">
 
             <label for="company">Company</label>
             <input type="text" class="form-control" id="company" name="company" placeholder="Krusty Krab">
@@ -81,6 +79,9 @@
 
             <label for="location">Location</label>
             <input type="text" class="form-control" id="location" name="location" placeholder="Bikini Bottom">
+
+            <label for="link">Link</label>
+            <input type="text" class="form-control" id="link" name="link" placeholder="https://thekrustykrabpenida.business.site/">
 
             <label for="status">Application Submitted?</label>
             <input type="checkbox" id="submitted" name="submitted" value="true">
@@ -93,18 +94,24 @@
 
           <h4>LinkedIn Posting Web Scrape Entry</h4>
           <div class="form-group">
-          <form action="/submit" method="POST">
+          <form action="/scrape_linkedin" method="POST">
             <label for="link">Link</label>
-            <input type="text" class="form-control" id="link" name="link" placeholder="https://thekrustykrabpenida.business.site/">
+            <input type="text" class="form-control" id="link" name="link" placeholder="https://www.linkedin.com/jobs/view/krusty_krab_cook">
+            <input type="submit" class="btn btn-primary btn-block" name="submit" value="Get Data"></input>
+          </form>
 
+          <form action="/submit" method="POST">
             <label for="company">Company</label>
-            <input type="text" class="form-control" id="company" name="company" placeholder="Krusty Krab">
+            <input type="text" class="form-control" id="s_company" name="company" placeholder="Krusty Krab" value="{{ information['company'] }}">
 
             <label for="position">Position</label>
-            <input type="text" class="form-control" id="position" name="position" placeholder="Cook">
+            <input type="text" class="form-control" id="s_position" name="position" placeholder="Cook" value="{{ information['position'] }}">
 
             <label for="location">Location</label>
-            <input type="text" class="form-control" id="location" name="location" placeholder="Bikini Bottom">
+            <input type="text" class="form-control" id="s_location" name="location" placeholder="Bikini Bottom" value="{{ information['location'] }}">
+
+            <label for="link">Link</label>
+            <input type="text" class="form-control" id="s_link" name="link" placeholder="https://thekrustykrabpenida.business.site/" value="{{ information['link'] }}">
 
             <label for="status">Application Submitted?</label>s
             <input type="checkbox" id="submitted" name="submitted" value="true">
